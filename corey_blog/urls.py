@@ -27,7 +27,7 @@ urlpatterns = [
     path('', include('users.urls')),
     path('', include('blog.urls')),
     path('accounts/', include('allauth.urls'))
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
 if settings.DEBUG:
