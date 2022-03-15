@@ -4,6 +4,20 @@
     {% for post in posts %}
     <article class="media content-section">
       <img class="rounde_circle article-img" src="{{ post.author.profile.image.url }}"> 
+
+        {% if user.is_authenticated %}
+          {% if post.author in user.following.all %}
+            <form method='POST' action="{% url 'unfollow' post.author.id %}">
+              {% csrf_token %}
+              <button class="btn btn-outline-secondary  " type="submit">UnFollow</button>
+          {% else %}
+            <form method='POST' action="{% url 'follow' post.author.id %}">
+              {% csrf_token %}
+              <button class="btn btn-outline-secondary  " type="submit">Follow</button>
+            </form>
+          {% endif %}
+        {% endif %}
+      
         <div class="media-body">
           <div class="article-metadata">
             <a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>
