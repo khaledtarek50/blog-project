@@ -1,0 +1,11 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+        {% for followed in following %}
+            <li>{{ followed.username }} </li>
+        {% endfor %}
+        
+    {% endif %}
+{% endblock %}
